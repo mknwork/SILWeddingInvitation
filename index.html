@@ -1,1 +1,55 @@
-Hello Mayur
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff4081;
+        }
+
+        p {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        #qr-code {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wedding Invitation</h1>
+        <p>You are cordially invited to the wedding of</p>
+        <h2>John Doe & Jane Smith</h2>
+        <p>Date: January 1, 2024</p>
+        <p>Time: 4:00 PM</p>
+        <p>Location: Beautiful Venue, City</p>
+
+        <!-- QR Code for Location -->
+        <div id="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Beautiful%20Venue%2C%20City" alt="QR Code">
+        </div>
+        
+        <p>Please join us in celebrating this joyous occasion.</p>
+    </div>
+</body>
+</html>

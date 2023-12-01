@@ -9,47 +9,149 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
+            background: linear-gradient(to right, #ff4081, #ffd670);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            color: #fff;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         h1 {
-            color: #ff4081;
+            font-size: 3em;
+            color: #fff;
+            margin-bottom: 10px;
         }
 
         p {
-            color: #333;
-            line-height: 1.6;
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #fff;
         }
 
-        #qr-code {
+        pre {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #fff;
+        }
+        #countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .digit {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff4081;
+            margin: 0 10px;
+            transform-origin: 50% 50%;
+            animation: rotateScale 1s infinite alternate;
+        }
+
+        @keyframes rotateScale {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            100% {
+                transform: scale(1.1) rotate(10deg);
+            }
+        }
+
+        #days-label, #hours-label, #minutes-label, #seconds-label {
+            font-size: 1em;
+            color: #ffd670;
+        }
+
+        #map-button {
+            background-color: #ff4081;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            border-radius: 5px;
             margin-top: 20px;
+            display: inline-block;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Wedding Invitation</h1>
-        <p>You are cordially invited to the wedding of</p>
-        <h2>John Doe & Jane Smith</h2>
-        <p>Date: January 1, 2024</p>
-        <p>Time: 4:00 PM</p>
-        <p>Location: Beautiful Venue, City</p>
+        <h1>Save the Date</h1>
+        <p>You are invited to the wedding of</p>
+        <h2><em>Aniket Rajapure & Dhanashree Banakar</em></h2>
+        <p>Date: <b><em>December 15, 2023</em></em></b></p>
+        <p>Time: <b><em>03:15 PM</em></b></p>
 
-        <!-- QR Code for Location -->
-        <div id="qr-code">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Beautiful%20Venue%2C%20City" alt="QR Code">
+        <h1>Countdown Begins</h1>
+        <!-- Countdown Timer -->
+        <div id="countdown-container">
+            <div class="digit" id="days">00</div>D
+            <div class="digit" id="hours">00</div>H
+            <div class="digit" id="minutes">00</div>M
+            <div class="digit" id="seconds">00</div>S
         </div>
+        <p>Location:</p>
+        <p>Shiv Parvati Lawns Saswad-Jejuri Road, Near Hotel Aaisaheb Veg,
+            Purandar Pune</p>
+         <!-- Button to Open Google Maps -->
+        <a id="map-button" href="https://www.google.com/maps/place/Shiv+Parvati+lawns/@18.2998056,74.1061944,17z/data=!4m6!3m5!1s0x3bc2fb418b4312cf:0x9f1122fe89b0abaa!8m2!3d18.2993165!4d74.1060662!16s%2Fg%2F11ckv52fc1?entry=ttu" target="_blank">View Location on Google Maps</a>
         
-        <p>Please join us in celebrating this joyous occasion.</p>
+        
+        <p>We can't wait to celebrate with you!</p>
+        
+
+        <script>
+            // Set the date we're counting down to
+            var countDownDate = new Date("December 15, 2023 15:15:00").getTime();
+
+            // Update the countdown every 1 second
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update the countdown values
+                document.getElementById("days").innerText = formatTime(days);
+                document.getElementById("hours").innerText = formatTime(hours);
+                document.getElementById("minutes").innerText = formatTime(minutes);
+                document.getElementById("seconds").innerText = formatTime(seconds);
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("days").innerText = "00";
+                    document.getElementById("hours").innerText = "00";
+                    document.getElementById("minutes").innerText = "00";
+                    document.getElementById("seconds").innerText = "00";
+                }
+            }, 1000);
+
+            // Helper function to format time values (add leading zero)
+            function formatTime(time) {
+                return time < 10 ? "0" + time : time;
+            }
+        </script>
     </div>
 </body>
 </html>
